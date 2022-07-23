@@ -9,6 +9,7 @@ namespace WindowsFormsApp2.Model
 {
     internal class Product
     {
+        static private List<Product> products = new List<Product>();
         public int number { get; set; }
         public DateTime Date { get; set; }
         public int inventoryNumber { get; set; }
@@ -18,9 +19,13 @@ namespace WindowsFormsApp2.Model
 
         public void save()
         {
-            MessageBox.Show("Product is saved.");
+            products.Add(this);
         }
 
+        public static List<Product> getAllProducts()
+        {
+            return products;
+        }
     }
 
 }
