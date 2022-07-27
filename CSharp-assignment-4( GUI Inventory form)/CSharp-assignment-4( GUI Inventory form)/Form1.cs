@@ -14,9 +14,10 @@ namespace CSharp_assignment_4__GUI_Inventory_form_
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        public Form1(string name)
         {
             InitializeComponent();
+            currentUser.Text += name;
         }
 
         private void btnSubmit_Click(object sender, EventArgs e)
@@ -81,12 +82,53 @@ namespace CSharp_assignment_4__GUI_Inventory_form_
                 errorProvider1.SetError(txt_price, "The field should contain number(it can be decimal number).");
             }
 
-            if(allFieldsAreCorrect == true)
+            p.isAvailable = isAvailable.Checked;
+
+            foreach (var item in clbCatagory.CheckedItems)
+            {
+                p.catagory += item.ToString() + " ";
+            }
+
+            if (rbSimple.Checked == false && rbVariable.Checked == false)
+            {
+                allFieldsAreCorrect = false;
+                errorProvider1.SetError(gbProductType, "One of the radio buttons should be selected.");
+
+            }
+
+            p.productType=(rbVariable.Checked==true)?"Variable":"Simple";
+
+            if (allFieldsAreCorrect == true)
             {
                 p.save();
                 dgvProducts.DataSource = null;
                 dgvProducts.DataSource = Product.getAllProducts();
             }
+
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            txt_count.Text = "";
+            txt_inventory_number.Text = "";
+            txt_number.Text = "";
+            txt_object_name.Text = "";
+            txt_price.Text = "";
+            isAvailable.Checked = false;
+        }
+
+        private void isAvailable_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
     }

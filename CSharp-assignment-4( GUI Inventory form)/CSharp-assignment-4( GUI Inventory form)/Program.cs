@@ -16,7 +16,7 @@ namespace CSharp_assignment_4__GUI_Inventory_form_
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new Login());
         }
     }
 }
